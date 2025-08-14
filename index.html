@@ -26,6 +26,19 @@ https://templatemo.com/tm-595-3d-coverflow
             padding: 0;
             overflow-x: hidden; /* กันเลื่อนแนวนอน */
         }
+        .logo-container  {
+            max-width: 90%;  /* ให้ภาพไม่กว้างเกิน container */          
+        }
+        .logo-container img {
+          max-width: 20%;  /* ให้ภาพไม่กว้างเกิน container */
+          height: auto;     /* รักษาสัดส่วนภาพ */
+          display: block;   /* ตัด space เกินของ inline element */
+        }
+        .logo-text {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
     </style>
 </head>
 <body>
@@ -336,6 +349,7 @@ https://templatemo.com/tm-595-3d-coverflow
 </body>
 
 </html>
+
 
 
 
