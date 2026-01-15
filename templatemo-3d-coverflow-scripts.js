@@ -47,7 +47,9 @@ document.addEventListener('click', (e) => {
 // =====================
 // Fetch data from Google Apps Script
 // =====================
-fetch('https://script.google.com/macros/s/AKfycbyvJ0NJ-x60hU4VTcaAvzjLnXtK2w53qQIyGHCruxC1ourHPp0tkvGuv5smsykw1UpTKg/exec')
+fetch('https://script.google.com/macros/s/AKfycbyvJ0NJ-x60hU4VTcaAvzjLnXtK2w53qQIyGHCruxC1ourHPp0tkvGuv5smsykw1UpTKg/exec', {
+  cache: 'force-cache'
+})
   .then(res => res.json())
   .then(data => {
     imageData = data;
@@ -278,3 +280,4 @@ function updatePlayPauseButton() {
 
 // เริ่มต้น
 updatePlayPauseButton();
+
