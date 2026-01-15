@@ -98,21 +98,6 @@ https://templatemo.com/tm-595-3d-coverflow
             </div>
         </div>
     </section>
-
-    <script >
-        imageData.forEach((item, index) => {
-          coverflow.innerHTML += `
-            <div class="coverflow-item" data-index="${index}">
-              <div class="cover image-loading">
-                <img src="${item.image}" alt="${item.title}" loading="lazy">
-              </div>
-              <div class="reflection"></div>
-            </div>
-          `;
-        });
-    </script>
-
-
     
 
     <!-- About Section -->
@@ -248,9 +233,74 @@ https://templatemo.com/tm-595-3d-coverflow
 
 <script src="templatemo-3d-coverflow-scripts.js"></script>
 
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const coverflow = document.getElementById("coverflow");
+  const currentTitle = document.getElementById("current-title");
+  const currentDescription = document.getElementById("current-description");
+  const dotsContainer = document.getElementById("dots");
+
+  let imageData = [];
+  let currentIndex = 0;
+
+  fetch("https://script.google.com/macros/s/AKfycbyvJ0NJ-x60hU4VTcaAvzjLnXtK2w53qQIyGHCruxC1ourHPp0tkvGuv5smsykw1UpTKg/exec")
+    .then(res => res.json())
+    .then(data => {
+      imageData = data;
+
+      if (!imageData.length) {
+        currentTitle.textContent = "ไม่พบข้อมูล";
+        currentDescription.textContent = "";
+        return;
+      }
+
+      // สร้าง coverflow item
+      imageData.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "coverflow-item";
+        div.dataset.index = index;
+
+        div.innerHTML = `
+          <div class="cover image-loading">
+            <img src="${item.image}" alt="${item.title}" loading="lazy">
+          </div>
+          <div class="reflection"></div>
+        `;
+
+        coverflow.appendChild(div);
+
+        // dots
+        const dot = document.createElement("span");
+        dot.className = "dot";
+        dot.onclick = () => navigateTo(index);
+        dotsContainer.appendChild(dot);
+      });
+
+      updateContent(0);
+      updateCoverflow();
+    });
+
+  window.updateContent = function(index) {
+    currentTitle.textContent = imageData[index].title;
+    currentDescription.textContent = imageData[index].description;
+  };
+
+  window.navigateTo = function(index) {
+    currentIndex = index;
+    updateCoverflow();
+    updateContent(index);
+  };
+
+});
+</script>
+
+
 </body>
 
 </html>
+
 
 
 
