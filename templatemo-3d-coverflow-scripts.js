@@ -229,26 +229,34 @@ container.addEventListener('touchend', e => {
 // =====================
 // Autoplay
 // =====================
-function startAutoplay() {
-  autoplayInterval = setInterval(() => {
-    navigate(1);
-  }, 4000);
-  isPlaying = true;
-}
-
-function stopAutoplay() {
-  clearInterval(autoplayInterval);
-  autoplayInterval = null;
-  isPlaying = false;
-}
+let autoplayInterval = null;
+let isPlaying = false;
 
 function toggleAutoplay() {
-  isPlaying ? stopAutoplay() : startAutoplay();
+  const btn = document.getElementById('playPauseBtn');
+  const playIcon = btn.querySelector('.play-icon');
+  const pauseIcon = btn.querySelector('.pause-icon');
+
+  if (!isPlaying) {
+    // ▶ PLAY
+    autoplayInterval = setInterval(() => {
+      navigate(1);
+    }, 3000);
+
+    playIcon.style.display = 'none';
+    pauseIcon.style.display = 'inline';
+
+    isPlaying = true;
+  } else {
+    // ❚❚ PAUSE
+    clearInterval(autoplayInterval);
+    autoplayInterval = null;
+
+    playIcon.style.display = 'inline';
+    pauseIcon.style.display = 'none';
+
+    isPlaying = false;
+  }
 }
 
-function handleUserInteraction() {
-  stopAutoplay();
-}
 
-// expose
-window.toggleAutoplay = toggleAutoplay;
