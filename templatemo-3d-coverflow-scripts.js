@@ -236,6 +236,7 @@ function toggleAutoplay() {
   const btn = document.getElementById('playPauseBtn');
   const playIcon = btn.querySelector('.play-icon');
   const pauseIcon = btn.querySelector('.pause-icon');
+  isPlaying ? stopAutoplay() : startAutoplay();
 
   if (!isPlaying) {
     // ▶ PLAY
@@ -259,5 +260,33 @@ function toggleAutoplay() {
   }
 }
 
+function updatePlayPauseButton() {
+    if (isPlaying) {
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+    } else {
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+    }
+}
 
+function startAutoplay() {
+    autoplayInterval = setInterval(() => {
+        navigate(1);
+    }, 4000);
 
+    isPlaying = true;
+    updatePlayPauseButton();
+}
+function stopAutoplay() {
+    if (autoplayInterval) {
+        clearInterval(autoplayInterval);
+        autoplayInterval = null;
+    }
+
+    isPlaying = false;
+    updatePlayPauseButton();
+}
+
+updatePlayPauseButton();
+startAutoplay();
