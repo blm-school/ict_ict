@@ -63,73 +63,57 @@ https://templatemo.com/tm-595-3d-coverflow
         </div>
     </header>
 
+
+
     <!-- Home Section -->
     <section id="home" class="section">
         <div class="coverflow-wrapper">
+    
+            <!-- Title & Description (ดึงจาก Google Sheet) -->
             <div class="info">
-                <h2 id="current-title">Mountain Landscape</h2>
-                <p id="current-description">Majestic peaks covered in snow during golden hour</p>
+                <h2 id="current-title">กำลังโหลด...</h2>
+                <p id="current-description">กรุณารอสักครู่</p>
             </div>
-
+    
             <div class="coverflow-container" tabindex="0">
+    
+                <!-- Coverflow (JS จะสร้าง item ใส่ตรงนี้) -->
                 <div class="coverflow" id="coverflow">
-                    <div class="coverflow-item" data-index="0">
-                        <div class="cover image-loading">
-                            <img src="images/mountain-landscape.jpg" alt="Mountain Landscape" loading="lazy">
-                        </div>
-                        <div class="reflection"></div>
-                    </div>
-                    <div class="coverflow-item" data-index="1">
-                        <div class="cover image-loading">
-                            <img src="images/forest-path.jpg" alt="Forest Path" loading="lazy">
-                        </div>
-                        <div class="reflection"></div>
-                    </div>
-                    <div class="coverflow-item" data-index="2">
-                        <div class="cover image-loading">
-                            <img src="images/serene-water-mirroring.jpg" alt="Lake Reflection" loading="lazy">
-                        </div>
-                        <div class="reflection"></div>
-                    </div>
-                    <div class="coverflow-item" data-index="3">
-                        <div class="cover image-loading">
-                            <img src="images/ocean-sunset-golden-hour.jpg" alt="Ocean Sunset" loading="lazy">
-                        </div>
-                        <div class="reflection"></div>
-                    </div>
-                    <div class="coverflow-item" data-index="4">
-                        <div class="cover image-loading">
-                            <img src="images/rolling-sand-dunes.jpg" alt="Desert Dunes" loading="lazy">
-                        </div>
-                        <div class="reflection"></div>
-                    </div>
-                    <div class="coverflow-item" data-index="5">
-                        <div class="cover image-loading">
-                            <img src="images/starry-night.jpg" alt="Starry Night" loading="lazy">
-                        </div>
-                        <div class="reflection"></div>
-                    </div>
-                    <div class="coverflow-item" data-index="6">
-                        <div class="cover image-loading">
-                            <img src="images/cascading-waterfall.jpg" alt="Waterfall" loading="lazy">
-                        </div>
-                        <div class="reflection"></div>
-                    </div>
+                    <!-- dynamic items -->
                 </div>
-
+    
+                <!-- Navigation -->
                 <button class="nav-button prev" onclick="navigate(-1)">‹</button>
                 <button class="nav-button next" onclick="navigate(1)">›</button>
-
+    
+                <!-- Dots -->
                 <div class="dots-container" id="dots"></div>
-                
-                <!-- Play/Pause Button -->
+    
+                <!-- Play / Pause -->
                 <button class="play-pause-button" id="playPauseBtn" onclick="toggleAutoplay()">
                     <span class="play-icon">▶</span>
-                    <span class="pause-icon" style="display: none;">❚❚</span>
+                    <span class="pause-icon" style="display:none;">❚❚</span>
                 </button>
+    
             </div>
         </div>
     </section>
+
+    <script >
+        imageData.forEach((item, index) => {
+          coverflow.innerHTML += `
+            <div class="coverflow-item" data-index="${index}">
+              <div class="cover image-loading">
+                <img src="${item.image}" alt="${item.title}" loading="lazy">
+              </div>
+              <div class="reflection"></div>
+            </div>
+          `;
+        });
+    </script>
+
+
+    
 
     <!-- About Section -->
     <section id="about" class="section">
@@ -267,6 +251,7 @@ https://templatemo.com/tm-595-3d-coverflow
 </body>
 
 </html>
+
 
 
 
