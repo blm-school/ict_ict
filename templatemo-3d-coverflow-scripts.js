@@ -230,7 +230,7 @@ container.addEventListener('touchend', e => {
 }, { passive: true });
 
 // =====================
-// Autoplay
+// Autoplay (CLEAN VERSION)
 // =====================
 
 function startAutoplay() {
@@ -258,38 +258,18 @@ function toggleAutoplay() {
   isPlaying ? stopAutoplay() : startAutoplay();
 }
 
-
 function updatePlayPauseButton() {
-    if (!playIcon || !pauseIcon) return;
+  if (!playIcon || !pauseIcon) return;
 
-    if (isPlaying) {
-        playIcon.style.display = 'none';
-        pauseIcon.style.display = 'block';
-    } else {
-        playIcon.style.display = 'block';
-        pauseIcon.style.display = 'none';
-    }
+  if (isPlaying) {
+    playIcon.style.display = 'none';
+    pauseIcon.style.display = 'block';
+  } else {
+    playIcon.style.display = 'block';
+    pauseIcon.style.display = 'none';
+  }
 }
 
-function startAutoplay() {
-    autoplayInterval = setInterval(() => {
-        navigate(1);
-    }, 4000);
-
-    isPlaying = true;
-    updatePlayPauseButton();
-}
-function stopAutoplay() {
-    if (autoplayInterval) {
-        clearInterval(autoplayInterval);
-        autoplayInterval = null;
-    }
-
-    isPlaying = false;
-    updatePlayPauseButton();
-}
-
+// เริ่มต้น
 updatePlayPauseButton();
 startAutoplay();
-
-
