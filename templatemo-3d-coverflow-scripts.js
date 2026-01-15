@@ -49,20 +49,18 @@ document.addEventListener('click', (e) => {
 // =====================
 fetch('https://script.google.com/macros/s/AKfycbyvJ0NJ-x60hU4VTcaAvzjLnXtK2w53qQIyGHCruxC1ourHPp0tkvGuv5smsykw1UpTKg/exec')
   .then(res => res.json())
-  .then(data => {
+  .then(async data => {
     imageData = data;
-
-    if (!imageData.length) {
-      currentTitle.textContent = 'ไม่พบข้อมูล';
-      currentDescription.textContent = '';
-      return;
-    }
-
+    if (!imageData.length) return;
+  
+    await preloadImages(imageData); // 🚀 เร็วขึ้นชัดเจน
+  
     buildCoverflow();
     initImages();
     updateCoverflow();
     startAutoplay();
-  })
+  });
+
   .catch(err => {
     console.error(err);
     currentTitle.textContent = 'โหลดข้อมูลไม่สำเร็จ';
@@ -278,4 +276,18 @@ function updatePlayPauseButton() {
 
 // เริ่มต้น
 updatePlayPauseButton();
+
+
+//โหลดรูป ล่วงหน้า (Preload images)
+
+function preloadImages(data) {
+  return Promise.all(
+    data.map(item => new Promise(resolve => {
+      const img = new Image();
+      img.src = item.image;
+      img.onload = resolve;
+      img.onerror = resolve;
+    }))
+  );
+}
 
