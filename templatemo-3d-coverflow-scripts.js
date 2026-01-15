@@ -230,8 +230,6 @@ container.addEventListener('touchend', e => {
 // Autoplay
 // =====================
 
-let isPlaying = false;
-
 function toggleAutoplay() {
   const btn = document.getElementById('playPauseBtn');
   const playIcon = btn.querySelector('.play-icon');
@@ -290,3 +288,4 @@ function stopAutoplay() {
 
 updatePlayPauseButton();
 startAutoplay();
+
