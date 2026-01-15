@@ -14,6 +14,9 @@ const currentTitle = document.getElementById('current-title');
 const currentDescription = document.getElementById('current-description');
 const container = document.querySelector('.coverflow-container');
 
+const playIcon = document.querySelector('.play-icon');
+const pauseIcon = document.querySelector('.pause-icon');
+
 const menuToggle = document.getElementById('menuToggle');
 const mainMenu = document.getElementById('mainMenu');
 
@@ -230,35 +233,35 @@ container.addEventListener('touchend', e => {
 // Autoplay
 // =====================
 
-function toggleAutoplay() {
-  const btn = document.getElementById('playPauseBtn');
-  const playIcon = btn.querySelector('.play-icon');
-  const pauseIcon = btn.querySelector('.pause-icon');
-  isPlaying ? stopAutoplay() : startAutoplay();
+function startAutoplay() {
+  if (autoplayInterval) return;
 
-  if (!isPlaying) {
-    // ▶ PLAY
-    autoplayInterval = setInterval(() => {
-      navigate(1);
-    }, 3000);
+  autoplayInterval = setInterval(() => {
+    navigate(1);
+  }, 4000);
 
-    playIcon.style.display = 'none';
-    pauseIcon.style.display = 'inline';
-
-    isPlaying = true;
-  } else {
-    // ❚❚ PAUSE
-    clearInterval(autoplayInterval);
-    autoplayInterval = null;
-
-    playIcon.style.display = 'inline';
-    pauseIcon.style.display = 'none';
-
-    isPlaying = false;
-  }
+  isPlaying = true;
+  updatePlayPauseButton();
 }
 
+function stopAutoplay() {
+  if (autoplayInterval) {
+    clearInterval(autoplayInterval);
+    autoplayInterval = null;
+  }
+
+  isPlaying = false;
+  updatePlayPauseButton();
+}
+
+function toggleAutoplay() {
+  isPlaying ? stopAutoplay() : startAutoplay();
+}
+
+
 function updatePlayPauseButton() {
+    if (!playIcon || !pauseIcon) return;
+
     if (isPlaying) {
         playIcon.style.display = 'none';
         pauseIcon.style.display = 'block';
@@ -288,4 +291,5 @@ function stopAutoplay() {
 
 updatePlayPauseButton();
 startAutoplay();
+
 
