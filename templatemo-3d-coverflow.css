@@ -204,8 +204,8 @@ https://templatemo.com/tm-595-3d-coverflow
 
         .coverflow-item {
             position: absolute;
-            width: 300px;
-            height: 300px;
+            width: 640px;
+            height: 360px;
             transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             cursor: pointer;
             user-select: none;
@@ -1276,4 +1276,5 @@ https://templatemo.com/tm-595-3d-coverflow
                 font-size: 16px;
                 border-radius: 25px;
             }
+
         }
