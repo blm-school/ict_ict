@@ -229,7 +229,7 @@ container.addEventListener('touchend', e => {
 // =====================
 // Autoplay
 // =====================
-let autoplayInterval = null;
+
 let isPlaying = false;
 
 function toggleAutoplay() {
@@ -258,5 +258,6 @@ function toggleAutoplay() {
     isPlaying = false;
   }
 }
+
 
 
