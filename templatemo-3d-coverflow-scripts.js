@@ -135,6 +135,9 @@ function initImages() {
 // Coverflow logic
 // =====================
 function updateCoverflow() {
+  if (!imageData.length || !items.length) return;
+  if (!imageData[currentIndex]) return;
+
   if (isAnimating) return;
   isAnimating = true;
 
@@ -166,7 +169,6 @@ function updateCoverflow() {
     `;
     item.style.opacity = opacity;
     item.style.zIndex = 100 - absOffset;
-
     item.classList.toggle('active', index === currentIndex);
   });
 
@@ -174,17 +176,21 @@ function updateCoverflow() {
     dot.classList.toggle('active', index === currentIndex);
   });
 
-  currentTitle.textContent = imageData[currentIndex].title;
-  currentDescription.textContent = imageData[currentIndex].description;
+  // ✅ จุดที่พัง → ป้องกันแล้ว
+  const currentData = imageData[currentIndex];
+  currentTitle.textContent = currentData.title || '';
+  currentDescription.textContent = currentData.description || '';
 
   setTimeout(() => isAnimating = false, 600);
 }
+
 
 // =====================
 // Navigation
 // =====================
 function navigate(direction) {
-  if (isAnimating) return;
+  if (!items.length) return;
+
   currentIndex = (currentIndex + direction + items.length) % items.length;
   updateCoverflow();
 }
@@ -272,4 +278,4 @@ function updatePlayPauseButton() {
 
 // เริ่มต้น
 updatePlayPauseButton();
-startAutoplay();
+
