@@ -42,36 +42,15 @@ https://templatemo.com/tm-595-3d-coverflow
         });
 
         // Image data with titles and descriptions
-        const imageData = [
-            {
-                title: "Mountain Landscape",
-                description: "Majestic peaks covered in snow during golden hour"
-            },
-            {
-                title: "Forest Path",
-                description: "A winding trail through ancient woodland"
-            },
-            {
-                title: "Lake Reflection",
-                description: "Serene waters mirroring the surrounding landscape"
-            },
-            {
-                title: "Ocean Sunset",
-                description: "Golden hour over endless ocean waves"
-            },
-            {
-                title: "Desert Dunes",
-                description: "Rolling sand dunes under vast blue skies"
-            },
-            {
-                title: "Starry Night",
-                description: "Countless stars illuminating the dark sky"
-            },
-            {
-                title: "Waterfall",
-                description: "Cascading water through lush green forest"
-            }
-        ];
+        let imageData = [];
+
+        fetch('https://script.google.com/macros/s/AKfycbyvJ0NJ-x60hU4VTcaAvzjLnXtK2w53qQIyGHCruxC1ourHPp0tkvGuv5smsykw1UpTKg/exec')
+          .then(res => res.json())
+          .then(data => {
+            imageData = data;
+            updateContent(currentIndex);
+          });
+
 
         // Create dots
         items.forEach((_, index) => {
@@ -380,4 +359,5 @@ https://templatemo.com/tm-595-3d-coverflow
         // Initialize
         updateCoverflow();
         container.focus();
+
         startAutoplay();
